@@ -28,6 +28,10 @@ export function CountdownTimer({
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    setTimeLeft(initialTimeInSeconds);
+  }, [initialTimeInSeconds]);
+
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;

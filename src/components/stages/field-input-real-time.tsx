@@ -78,8 +78,6 @@ const FieldInputRealtime = ({
       ) {
         set(simulation, `data.fields.${field.name}`, field.value);
         set(simulation, `data.fields.${switchName}`, "TBD");
-        console.log("simulation", simulation.data);
-
         updateDataSimulation(simulation.data);
       }
     },
@@ -93,12 +91,16 @@ const FieldInputRealtime = ({
       if (!simulation || !stage) return;
       set(simulation, `data.fields.${switchName}`, newData);
       if (
-        (stage.name === STAGE_NAMES.analysis &&
-          checkShouldFinishAnalysis(simulation.data.fields)) ||
-        (stage.name === STAGE_NAMES.structuring &&
-          checkShouldFinishStructuring(simulation.data.fields))
+        stage.name === STAGE_NAMES.analysis &&
+        checkShouldFinishAnalysis(simulation.data.fields)
       ) {
-        console.log("simulation", simulation);
+        simulation.data.timeStart[stage.id] = new Date().toISOString();
+        return handleFinishStage(simulation);
+      }
+      if (
+        stage.name === STAGE_NAMES.structuring &&
+        checkShouldFinishStructuring(simulation.data.fields)
+      ) {
         return handleFinishStage(simulation);
       }
       updateDataSimulation(simulation.data);

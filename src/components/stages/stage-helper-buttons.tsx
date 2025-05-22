@@ -12,7 +12,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import StageInformation from "./stage-information";
 
 const StageHelperButtons = ({ children }: { children: React.ReactNode }) => {
   const { simulation, team } = useSimulation();
@@ -22,13 +21,6 @@ const StageHelperButtons = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mt-4">
-      <div className="sm:hidden">
-        <StageInformation
-          stageName="Structuring"
-          nextStageName="Summary"
-          nextStageDuration="30 minutes"
-        />
-      </div>
       <nav className="flex flex-row sm:flex-col space-x-2 sm:space-x-0 sm:space-y-2">
         <DrawerDialog
           title="Play simulator"

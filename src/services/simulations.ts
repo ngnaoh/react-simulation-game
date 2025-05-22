@@ -19,6 +19,9 @@ export const createSimulation = async ({
       .eq("name", "analysis")
       .single();
 
+    TemplateDataSimulation.timeStart = {
+      [stage.id]: new Date().toISOString(),
+    };
     const { data: simulation, error: simulationError } = await supabase
       .from("simulations")
       .insert({
@@ -97,14 +100,18 @@ export const updateStage = async (
         .eq("name", nextStage)
         .single();
       stageId = stage.id;
+      simulation.data.timeStart[stageId] = new Date().toISOString();
     }
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("simulations")
       .update({ stage_id: nextStage ? stageId : null, data: simulation.data })
-      .eq("id", simulation.id);
+      .eq("id", simulation.id)
+      .select()
+      .single();
 
     if (error) throw error;
+    return data;
   } catch (err) {
     return err;
   }
@@ -172,6 +179,7 @@ export const fetchSimulation = async (
         updateSimulation(data, simulationId);
       }, 1000);
     }
+
     return {
       simulation: data as Simulation,
       stage: stage as Stage,

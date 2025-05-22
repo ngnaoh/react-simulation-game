@@ -11,10 +11,17 @@ export default function Structuring() {
           <StageInformation
             stageName="Structuring"
             nextStageName="Summary"
-            nextStageDuration="30 minutes"
+            nextStageDuration="5 minutes"
           />
         }
       />
+      <div className="sm:hidden">
+        <StageInformation
+          stageName="Structuring"
+          nextStageName="Summary"
+          nextStageDuration="5 minutes"
+        />
+      </div>
       <StageHelperButtons>
         <FormStructuring />
       </StageHelperButtons>

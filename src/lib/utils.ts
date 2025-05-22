@@ -11,7 +11,7 @@ export function calculateTimeLeft(
   createdAt: string = "",
   duration: number = 0
 ) {
-  if (!createdAt || !duration) return 5; // TODO: update to 300
+  if (!createdAt || !duration) return 300;
   const createdTime = new Date(createdAt).getTime();
   const currentTime = new Date().getTime();
   const elapsedSeconds = Math.floor((currentTime - createdTime) / 1000);

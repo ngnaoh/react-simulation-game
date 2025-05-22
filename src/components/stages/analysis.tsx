@@ -16,6 +16,13 @@ export default function Analysis() {
         }
         confirmWhenLoggingOut
       />
+      <div className="sm:hidden">
+        <StageInformation
+          stageName="Analysis"
+          nextStageName="Structuring"
+          nextStageDuration="1 hour"
+        />
+      </div>
       <StageHelperButtons>
         <FormAnalysis />
       </StageHelperButtons>

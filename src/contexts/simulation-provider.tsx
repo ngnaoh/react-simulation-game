@@ -23,7 +23,7 @@ type SimulationContextType = {
   team: Team | null;
   finished: boolean;
   updateDataSimulation: (dataSimulation: DataSimulation) => Promise<void>;
-  handleFinishStage: (newSimulation?: Simulation) => Promise<void>;
+  handleFinishStage: (newSimulation: Simulation) => Promise<void>;
 };
 
 const SimulationContext = createContext<SimulationContextType>({
@@ -51,8 +51,6 @@ export function SimulationProvider({
 
   const updateDataSimulation = useCallback(
     async (dataSimulation: DataSimulation) => {
-      console.log("aaa");
-
       if (!simulation) return;
       await updateSimulation(
         { ...simulation, data: dataSimulation },
@@ -63,14 +61,15 @@ export function SimulationProvider({
   );
 
   const handleFinishStage = useCallback(
-    async (newSimulation?: Simulation) => {
+    async (newSimulation: Simulation) => {
       if (finished) {
         return await navigate("/dashboard");
       }
-      if (!simulation || !stage) return;
-      await updateStage(newSimulation ?? simulation, stage);
+      if (!stage) return;
+      const updatedSimulation = await updateStage(newSimulation, stage);
+      setSimulation(updatedSimulation as Simulation);
     },
-    [finished, simulation, stage, navigate]
+    [finished, stage, navigate]
   );
 
   useEffect(() => {

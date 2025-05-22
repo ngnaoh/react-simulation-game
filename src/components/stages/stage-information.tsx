@@ -2,13 +2,13 @@ import { FileTextIcon } from "lucide-react";
 import { CountdownTimer } from "../countdown-timer";
 import { Badge } from "../ui/badge";
 import { useSimulation } from "@/contexts/simulation-provider";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { calculateTimeLeft } from "@/lib/utils";
 
 type StageInformationProps = {
   stageName: string;
-  nextStageName: string;
-  nextStageDuration: string;
+  nextStageName?: string;
+  nextStageDuration?: string;
 };
 
 const StageInformation = ({
@@ -18,8 +18,18 @@ const StageInformation = ({
 }: StageInformationProps) => {
   const { simulation, stage, team, handleFinishStage } = useSimulation();
   const initialTimeInSeconds = useMemo(() => {
-    return calculateTimeLeft(simulation?.created_at, stage?.duration);
-  }, [simulation?.created_at, stage?.duration]);
+    if (!simulation?.stage_id) return 60;
+    return calculateTimeLeft(
+      simulation?.data.timeStart[stage?.id ?? ""] ?? "",
+      stage?.duration
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [simulation?.stage_id, stage?.duration]);
+
+  const onTimeUp = useCallback(() => {
+    if (!simulation) return;
+    handleFinishStage(simulation);
+  }, [simulation, handleFinishStage]);
 
   return (
     <div>
@@ -27,7 +37,7 @@ const StageInformation = ({
         <div className="w-[100px]">
           <CountdownTimer
             initialTimeInSeconds={initialTimeInSeconds}
-            onTimeUp={handleFinishStage}
+            onTimeUp={onTimeUp}
           />
         </div>
         <div className="hidden sm:block h-6 w-px bg-border"></div>
@@ -42,16 +52,18 @@ const StageInformation = ({
           </Badge>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 text-muted-foreground mt-2 sm:mt-0">
-        <div className="flex items-center space-x-2">
-          <FileTextIcon className="h-4 w-4" />
-          <p className="text-xs sm:text-sm">
-            Next Stage: {nextStageName} - {nextStageDuration}
-          </p>
+      {nextStageName && nextStageDuration && (
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 text-muted-foreground mt-2 sm:mt-0">
+          <div className="flex items-center space-x-2">
+            <FileTextIcon className="h-4 w-4" />
+            <p className="text-xs sm:text-sm">
+              Next Stage: {nextStageName} - {nextStageDuration}
+            </p>
+          </div>
+          <div className="hidden sm:block h-6 w-px bg-border"></div>
+          <p className="text-xs sm:text-sm">{team?.name}</p>
         </div>
-        <div className="hidden sm:block h-6 w-px bg-border"></div>
-        <p className="text-xs sm:text-sm">{team?.name}</p>
-      </div>
+      )}
     </div>
   );
 };

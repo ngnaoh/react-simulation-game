@@ -2,6 +2,13 @@ import type { FieldRenderSetting } from "@/type/app";
 import type { DataSimulation } from "@/type/database";
 
 export const TemplateDataSimulation: DataSimulation = {
+  timeStart: {},
+  isViewedGuidance: {},
+  video: {
+    url: "http://youtube.com/watch?v=oHg5SJYRHA0",
+    title: "Introduction",
+    description: "Introduction to the simulation",
+  },
   fields: {
     ebitda: {
       name: "ebitda",
@@ -117,12 +124,6 @@ export const TemplateDataSimulation: DataSimulation = {
       },
     },
   },
-  isViewedGuidance: {},
-  video: {
-    url: "http://youtube.com/watch?v=oHg5SJYRHA0",
-    title: "Introduction",
-    description: "Introduction to the simulation",
-  },
   documents: [
     {
       title: "Introduction",
@@ -236,6 +237,55 @@ export const FirstPartFieldsStructuringRenderSetting: FieldRenderSetting[] = [
   },
 ];
 
+export const FirstPartFieldsStructuringRenderSettingMobile: FieldRenderSetting[] =
+  [
+    {
+      name: "Company 1",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company1.price",
+      unit: "x",
+      type: "inputText",
+    },
+    {
+      name: "companies.company1.shares",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "Company 2",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company2.price",
+      unit: "x",
+      type: "inputText",
+    },
+    {
+      name: "companies.company2.shares",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "Company 3",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company3.price",
+      unit: "x",
+      type: "inputText",
+    },
+    {
+      name: "companies.company3.shares",
+      unit: "$",
+      type: "inputText",
+    },
+  ];
+
 export const SecondPartFieldsStructuringRenderSetting: FieldRenderSetting[] = [
   {
     name: "companies.company1.investor1",
@@ -283,6 +333,70 @@ export const SecondPartFieldsStructuringRenderSetting: FieldRenderSetting[] = [
     type: "inputText",
   },
 ];
+
+export const SecondPartFieldsStructuringRenderSettingMobile: FieldRenderSetting[] =
+  [
+    {
+      name: "Company 1",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company1.investor1",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company1.investor2",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company1.investor3",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "Company 2",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company2.investor1",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company2.investor2",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company2.investor3",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "Company 3",
+      unit: "",
+      type: "spacing",
+    },
+    {
+      name: "companies.company3.investor1",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company3.investor2",
+      unit: "$",
+      type: "inputText",
+    },
+    {
+      name: "companies.company3.investor3",
+      unit: "$",
+      type: "inputText",
+    },
+  ];
 
 export const PieChartConfig = {
   value: {

@@ -208,6 +208,14 @@ const FieldInputRealtime = ({
     ]
   );
 
+  if (setting.type === FieldRenderType.spacing) {
+    return (
+      <div className="h-4">
+        <p className="font-bold">{setting.name}</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Label htmlFor={inputName} className="mb-2 block w-fit">

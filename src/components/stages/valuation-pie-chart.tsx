@@ -51,7 +51,7 @@ export function ValuationPieChart({
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square h-[300px]">
+      className="mx-auto aspect-square w-4/5">
       <PieChart>
         <Pie
           data={chartData}

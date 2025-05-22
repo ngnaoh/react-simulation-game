@@ -18,13 +18,15 @@ export function CountdownTimer({
       onTimeUp?.();
       return;
     }
+  }, [timeLeft, onTimeUp]);
 
+  useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, onTimeUp]);
+  }, []);
 
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);

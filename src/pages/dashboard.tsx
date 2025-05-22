@@ -1,9 +1,10 @@
-import { useUserSession } from "@/contexts/user-session-provider";
 import { hasPermission } from "@/utils/permissions";
 import DashboardAdmin from "@/components/dashboard-admin";
 import DashboardUser from "@/components/dashboard-user";
 import AppHeader from "@/components/app-header";
 import { Separator } from "@/components/ui/separator";
+import { useUserSession } from "@/contexts/user-session-provider";
+
 export default function Dashboard() {
   const { session, permissions } = useUserSession();
 
@@ -17,8 +18,11 @@ export default function Dashboard() {
                 <h1 className="text-xl font-bold">Finsimco</h1>
                 <p className="text-sm text-muted-foreground">Welcome back!</p>
               </div>
-              <Separator orientation="vertical" className="!h-10" />
-              <div className="flex flex-col">
+              <Separator
+                orientation="vertical"
+                className="!h-10 hidden sm:block"
+              />
+              <div className="flex-col hidden sm:block">
                 <p className="text-sm text-muted-foreground">
                   {session?.user.email}
                 </p>

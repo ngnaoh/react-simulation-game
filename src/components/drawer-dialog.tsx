@@ -46,12 +46,12 @@ export function DrawerDialog({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className={cn("", className)}>
+      <DrawerContent className={cn("p-3 min-w-full", className)}>
         <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
+          <DialogTitle className="mb-4">{title}</DialogTitle>
         </DialogHeader>
         {children}
-        <DialogFooter>{footer}</DialogFooter>
+        {footer && <DialogFooter>{footer}</DialogFooter>}
       </DrawerContent>
     </Drawer>
   );

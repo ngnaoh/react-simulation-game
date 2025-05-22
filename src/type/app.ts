@@ -8,6 +8,7 @@ export const FieldRenderType = {
   inputText: "inputText",
   slider: "slider",
   textarea: "textarea",
+  spacing: "spacing",
 } as const;
 
 export type FieldRenderType =

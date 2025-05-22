@@ -97,13 +97,13 @@ export default function OutputStructuring() {
   }, [data.summary]);
 
   return (
-    <div className="bg-background text-foreground flex items-center justify-center p-8">
+    <div className="bg-background text-foreground flex items-center justify-center pt-8">
       <Card className="w-full max-w-4xl bg-card border-border shadow-lg">
         <CardHeader className="border-b border-border pb-4">
-          <CardTitle className="text-3xl font-bold text-foreground">
+          <CardTitle className="font-bold text-foreground text-center sm:text-left text-lg sm:text-3xl">
             Common Outputs Overview
           </CardTitle>
-          <CardDescription className="text-muted-foreground">
+          <CardDescription className="text-muted-foreground text-center sm:text-left">
             Insights into company bids, capital raised, and subscription
             statuses.
           </CardDescription>
@@ -123,11 +123,13 @@ export default function OutputStructuring() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="summary" className="mt-6">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">
+            <TabsContent
+              value="summary"
+              className="mt-6 sm:w-full w-[60vw] mx-auto">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-foreground">
                 Capital & Bids Summary
               </h3>
-              <Table className="bg-muted rounded-md">
+              <Table className="bg-muted rounded-md w-full overflow-auto">
                 <TableHeader>
                   <TableRow className="border-b border-border px-4">
                     <TableHead className="text-muted-foreground pl-4">
@@ -170,10 +172,10 @@ export default function OutputStructuring() {
             </TabsContent>
 
             <TabsContent value="subscription" className="mt-6">
-              <h3 className="text-xl font-semibold mb-4 text-foreground">
+              <h3 className="text-lg sm:text-xl font-semibold mb-4 text-foreground">
                 Subscription Status
               </h3>
-              <Table className="bg-muted rounded-md">
+              <Table className="bg-muted rounded-md w-full overflow-auto">
                 <TableHeader>
                   <TableRow className="border-b border-border">
                     <TableHead className="text-muted-foreground pl-4">
@@ -234,10 +236,10 @@ export default function OutputStructuring() {
               Quick Insight
             </h3>
             <Card className="bg-muted border-border">
-              <CardContent className="p-4 flex items-center justify-between">
+              <CardContent className="sm:p-4 p-2 flex items-center sm:flex-row flex-col gap-2 justify-between">
+                <HelpCircleIcon className="h-5 w-5 text-muted-foreground" />
                 <div className="flex items-center gap-2">
-                  <HelpCircleIcon className="h-5 w-5 text-muted-foreground" />
-                  <p className="text-md text-foreground">
+                  <p className="text-md text-foreground sm:text-left text-center">
                     Which company received most bids from investors?
                     <br />
                     <span className="text-sm text-muted-foreground">
@@ -248,7 +250,7 @@ export default function OutputStructuring() {
                 <DrawerDialog
                   title="Most Bids Company"
                   trigger={
-                    <Button type="button" variant="outline" className="ml-4">
+                    <Button type="button" variant="outline" className="sm:ml-4">
                       View Answer
                     </Button>
                   }>

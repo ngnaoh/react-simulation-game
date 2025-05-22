@@ -78,9 +78,9 @@ const FormAnalysis = () => {
   return (
     <FormProvider {...methods}>
       <form>
-        <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2 space-y-6 pt-4">
-            <div className="grid grid-cols-2 gap-6">
+        <div className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="lg:col-span-2 space-y-4 md:space-y-6 pt-2 md:pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {FirstPartFieldsAnalysisRenderSetting.map((setting) => (
                 <FieldInputRealtime
                   key={setting.name}
@@ -90,19 +90,21 @@ const FormAnalysis = () => {
                 />
               ))}
             </div>
-            {SecondPartFieldsAnalysisRenderSetting.map((setting) => (
-              <FieldInputRealtime
-                key={setting.name}
-                setting={setting}
-                isTeam1={isTeam1}
-                isTeam2={isTeam2}
-              />
-            ))}
+            <div className="space-y-4 md:space-y-6">
+              {SecondPartFieldsAnalysisRenderSetting.map((setting) => (
+                <FieldInputRealtime
+                  key={setting.name}
+                  setting={setting}
+                  isTeam1={isTeam1}
+                  isTeam2={isTeam2}
+                />
+              ))}
+            </div>
           </div>
-          <div className="pt-4 flex justify-center md:col-span-1">
-            <Card className="bg-transparent border-border h-full">
+          <div className="pt-2 md:pt-4 flex justify-center lg:col-span-1">
+            <Card className="bg-transparent border-border w-full h-full">
               <CardHeader>
-                <CardTitle className="text-2xl text-card-foreground text-center border-b border-border pb-2">
+                <CardTitle className="text-xl md:text-2xl text-card-foreground text-center border-b border-border pb-2">
                   Valuation: ${valuation.toLocaleString()} million
                 </CardTitle>
               </CardHeader>
@@ -115,7 +117,7 @@ const FormAnalysis = () => {
               <CardFooter>
                 <div className="flex flex-col items-center justify-center space-y-2 w-full">
                   {!isTeam2Agree && (
-                    <p className="text-sm text-muted-foreground text-center font-bold">
+                    <p className="text-xs md:text-sm text-muted-foreground text-center font-bold">
                       Not yet agreed by Team 2
                     </p>
                   )}

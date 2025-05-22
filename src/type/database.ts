@@ -93,4 +93,7 @@ export type DataSimulation = {
   };
   video: Video;
   documents: Document[];
+  timeStart: {
+    [key: string]: string; // key is stage id
+  };
 };

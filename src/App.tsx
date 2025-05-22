@@ -1,20 +1,19 @@
-import { Route, Routes } from "react-router";
 import "./App.css";
-import { ThemeProvider } from "./components/theme-provider";
-import LoginPage from "./pages/auth/login";
-import Structuring from "./pages/stages/structuring";
-import Analysis from "./pages/stages/analysis";
+import { ThemeProvider, useTheme } from "./contexts/theme-provider";
+import { Toaster } from "./components/ui/sonner";
+import { UserSessionProvider } from "./contexts/user-session-provider";
+import AppRoute from "./route";
 
 function App() {
+  const { theme } = useTheme();
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Routes>
-        <Route index element={<LoginPage />} />
-        <Route path="stage">
-          <Route path="structuring" element={<Structuring />} />
-          <Route path="analysis" element={<Analysis />} />
-        </Route>
-      </Routes>
+    <ThemeProvider defaultTheme={theme} storageKey="vite-ui-theme">
+      <UserSessionProvider>
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <AppRoute />
+          <Toaster />
+        </div>
+      </UserSessionProvider>
     </ThemeProvider>
   );
 }

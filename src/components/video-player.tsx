@@ -1,16 +1,21 @@
 import { cn } from "@/lib/utils";
 import ReactPlayer from "react-player";
 
-export const VideoPlayer = ({ url, title, classname }: any) => {
+type VideoPlayerProps = {
+  url: string;
+  title?: string;
+  classNames?: string;
+};
+
+export const VideoPlayer = ({ url, title, classNames }: VideoPlayerProps) => {
   return (
     <div
       className={cn(
-        "w-full mx-auto bg-zinc-800 text-zinc-200 rounded-lg shadow-lg overflow-hidden",
-        classname
-      )}
-    >
+        "w-full mx-auto bg-background text-foreground rounded-lg shadow-lg overflow-hidden",
+        classNames
+      )}>
       {title && (
-        <div className="p-4 border-b border-zinc-700">
+        <div className="p-4 border-b border-border">
           <h2 className="text-lg font-semibold">{title}</h2>
         </div>
       )}

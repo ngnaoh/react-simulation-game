@@ -12,12 +12,14 @@ import { useState, type JSX, type PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 
 type TDrawerDialog = PropsWithChildren<{
+  title: string;
   trigger: JSX.Element;
   footer?: JSX.Element;
   className?: string;
 }>;
 
 export function DrawerDialog({
+  title,
   trigger,
   footer,
   className,
@@ -32,7 +34,7 @@ export function DrawerDialog({
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className={cn("", className)}>
           <DialogHeader>
-            <DialogTitle>Play simulator</DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
           {children}
           <DialogFooter>{footer}</DialogFooter>
@@ -46,7 +48,7 @@ export function DrawerDialog({
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent className={cn("", className)}>
         <DialogHeader>
-          <DialogTitle>Play simulator</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         {children}
         <DialogFooter>{footer}</DialogFooter>

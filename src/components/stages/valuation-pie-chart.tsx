@@ -1,29 +1,20 @@
 "use client";
 
-import { Cell, LabelList, Pie, PieChart, type PieLabel } from "recharts";
+import { Pie, PieChart } from "recharts";
 
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-
-const chartData = [
-  { browser: "chrome", value: 20, fill: "var(--color-chrome)" },
-  { browser: "safari", value: 80, fill: "var(--color-safari)" },
-];
-
-const chartConfig = {
-  value: {
-    label: "Value",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(240 1% 42%)",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(240 2% 26%)",
-  },
-} satisfies ChartConfig;
+import { type PieChartData } from "@/type/app";
 
 const RADIAN = Math.PI / 180;
+
+type CustomizedLabelProps = {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+};
 
 const renderCustomizedLabel = ({
   cx,
@@ -32,7 +23,7 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-}: any) => {
+}: CustomizedLabelProps) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -43,19 +34,24 @@ const renderCustomizedLabel = ({
       y={y}
       fill="white"
       textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
+      dominantBaseline="central">
       {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
 };
 
-export function ValuationPieChart() {
+type ValuationPieChartProps = {
+  chartData: PieChartData[];
+  chartConfig: ChartConfig;
+};
+export function ValuationPieChart({
+  chartData,
+  chartConfig,
+}: ValuationPieChartProps) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square h-[300px]"
-    >
+      className="mx-auto aspect-square h-[300px]">
       <PieChart>
         <Pie
           data={chartData}
